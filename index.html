@@ -198,8 +198,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--acc)}
 aside{flex-direction:row;align-items:center;gap:12px;padding:10px 14px;border-right:0;border-bottom:1px solid var(--line);overflow:hidden}
 .me{display:flex;align-items:center;gap:10px;text-align:left}.pic{width:44px;height:44px;margin:0;border-width:2px}.me p,.soc,.foot,nav button svg{display:none}
 .me h2{font-size:.95rem}nav{display:flex;gap:0;overflow:auto;flex:1;scrollbar-width:none}nav button{padding:8px 10px;font-size:.8rem}
-main{padding:14px}h1{font-size:min(9vw,6.4vh)}.top .btn{display:none}.tools{padding:9px 14px;gap:12px}.tools b{font-size:.75rem}
-.bento{grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr 1fr;gap:10px;padding:10px}.tile{padding:12px}.tile.w{grid-column:span 2}.tile small,.list{display:none}.tile.w small{display:block}.chips i:nth-child(n+4){display:none}
+main{padding:14px;overflow-y:auto;overscroll-behavior-y:contain}h1{font-size:min(9vw,6.4vh)}.top .btn{display:none}.tools{padding:9px 14px;gap:12px}.tools b{font-size:.75rem}
+.bento{flex:none;grid-template-columns:1fr 1fr;grid-template-rows:minmax(284px,auto) minmax(148px,auto) minmax(148px,auto);gap:10px;padding:10px}.tile{padding:12px}.tile.w{grid-column:span 2}.tile small,.list{display:none}.tile.w small{display:block}.chips i:nth-child(n+4){display:none}
 .pn{padding:24px 18px}.ab,.g2,.g3{grid-template-columns:1fr}.ab .ph{max-width:200px}}
 @media(max-width:1000px) and (max-height:700px){.lead{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
