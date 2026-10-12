@@ -53,8 +53,35 @@ h1 em{font-style:normal;color:var(--acc)}
 .ic{width:34px;height:34px;border-radius:11px;background:var(--acc);display:grid;place-items:center;flex:none}
 .ic svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tile small{display:block;color:var(--mute);font-size:.78rem;margin-top:6px}
-.prev{margin-top:10px;flex:1;min-height:0;border-radius:12px;background:var(--full) 50% 22%/cover;position:relative;border:1px solid var(--line)}
-.prev::after{content:"";position:absolute;left:10px;top:8px;width:34px;height:8px;background:radial-gradient(circle,var(--acc) 3px,transparent 3.5px) 0 0/12px 8px repeat-x}
+.prev{margin-top:12px;flex:1;min-height:166px;padding:10px;border:1px solid var(--line);border-radius:16px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;background:radial-gradient(ellipse at 8% 100%,#ffdfc7 0,transparent 48%),linear-gradient(135deg,#e8eefb,#f8f8f4 68%,#fff)}
+.projects-preview-grid{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,.83fr);gap:9px;flex:1;min-height:0}
+.projects-window{position:relative;min-width:0;min-height:0;overflow:hidden;border:1px solid #0B1E3F20;border-radius:11px;background:#fff;box-shadow:0 5px 14px #0B1E3F18}
+.projects-window--main{display:grid;grid-template-rows:22px minmax(0,1fr)}
+.projects-browser-bar{display:flex;align-items:center;gap:3px;padding:0 8px;background:#fff;border-bottom:1px solid #0B1E3F12;color:#0B1E3F88;font-size:.48rem;font-weight:600;letter-spacing:.05em;white-space:nowrap;overflow:hidden}
+.projects-browser-dot{width:5px;height:5px;flex:none;border-radius:50%;background:#FF7A1A}
+.projects-browser-dot:nth-child(2){background:#0B1E3F30}.projects-browser-dot:nth-child(3){background:#0B1E3F18}
+.projects-browser-title{margin-left:5px;overflow:hidden;text-overflow:ellipsis}
+.projects-window img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;object-position:center 18%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.projects-category{position:absolute;left:7px;bottom:7px;z-index:1;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid #0B1E3F12;border-radius:999px;background:#ffffffed;color:#0B1E3F;font-size:.55rem;line-height:1.2;font-weight:700;white-space:nowrap;box-shadow:0 3px 10px #0B1E3F20;backdrop-filter:blur(8px)}
+.projects-category::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none}
+.projects-preview-side{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:9px;min-width:0;min-height:0}
+.projects-window--mini{display:grid;grid-template-rows:18px minmax(0,1fr)}
+.projects-window--mini .projects-browser-bar{padding:0 6px;font-size:.43rem}
+.projects-window--mini img{object-position:center 25%}
+.projects-window--mini .projects-category{left:6px;bottom:5px;padding:3px 6px;font-size:.49rem}
+.projects-flow{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:7px 8px 6px;border:1px solid #ffffff18;border-radius:11px;background:linear-gradient(145deg,#142c50,#0B1E3F);color:#fff;box-shadow:0 5px 14px #0B1E3F20}
+.projects-flow-head{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:.48rem;line-height:1.2;font-weight:700;letter-spacing:.055em;color:#fff}
+.projects-flow-sample{color:#ffffff9c;font-size:.43rem;font-weight:500;letter-spacing:0;white-space:nowrap}
+.projects-flow svg{display:block;width:100%;height:36px;min-height:24px;overflow:visible}
+.projects-flow path{fill:none;stroke:#FF9A50;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.projects-flow rect{fill:#fff;stroke:#ffffff30;stroke-width:1}
+.projects-flow text{fill:#0B1E3F;font-family:'Poppins',system-ui,sans-serif;font-size:6px;font-weight:600}
+.projects-preview-footer{display:flex;justify-content:flex-end;align-items:center;min-height:22px;padding:0 2px}
+.projects-explore{display:inline-flex;align-items:center;gap:7px;color:#0B1E3F;font-size:.69rem;font-weight:700;line-height:1.2}
+.projects-explore-icon{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--acc);color:#fff;transition:transform .25s,background .25s}
+.projects-explore-icon svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tile.w:hover .projects-window img{transform:scale(1.045)}
+.tile.w:hover .projects-explore-icon{transform:translateX(3px);background:#e9650b}
 .face{margin-top:10px;flex:1;min-height:0;border-radius:14px;background:var(--face) center/cover}
 .list{margin-top:8px;display:grid;font-size:.8rem;font-weight:500}
 .list span{padding:5px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
@@ -172,7 +199,7 @@ aside{flex-direction:row;align-items:center;gap:12px;padding:10px 14px;border-ri
 .me{display:flex;align-items:center;gap:10px;text-align:left}.pic{width:44px;height:44px;margin:0;border-width:2px}.me p,.soc,.foot,nav button svg{display:none}
 .me h2{font-size:.95rem}nav{display:flex;gap:0;overflow:auto;flex:1;scrollbar-width:none}nav button{padding:8px 10px;font-size:.8rem}
 main{padding:14px}h1{font-size:min(9vw,6.4vh)}.top .btn{display:none}.tools{padding:9px 14px;gap:12px}.tools b{font-size:.75rem}
-.bento{grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr 1fr;gap:10px;padding:10px}.tile{padding:12px}.tile.w{grid-column:span 2}.tile small,.list{display:none}.chips i:nth-child(n+4){display:none}
+.bento{grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr 1fr;gap:10px;padding:10px}.tile{padding:12px}.tile.w{grid-column:span 2}.tile small,.list{display:none}.tile.w small{display:block}.chips i:nth-child(n+4){display:none}
 .pn{padding:24px 18px}.ab,.g2,.g3{grid-template-columns:1fr}.ab .ph{max-width:200px}}
 @media(max-width:1000px) and (max-height:700px){.lead{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -197,7 +224,7 @@ main{padding:14px}h1{font-size:min(9vw,6.4vh)}.top .btn{display:none}.tools{padd
 <button class="btn" data-o="contact">Let's work together</button></div>
 <div class="tools"><b>Tools I<br>work with</b><div class="mq"><div class="tr" id="tr"></div></div></div>
 <div class="bento">
-<button class="tile w" data-o="projects"><div class="th"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 3h9v10H3z"/></svg></span>Projects</div><small>Sites, funnels and automations built to solve real problems.</small><div class="prev"></div></button>
+<button class="tile w" data-o="projects"><div class="th"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 3h9v10H3z"/></svg></span>Projects</div><small>Sites, funnels and automations built to solve real problems.</small><div class="prev" aria-hidden="true"><div class="projects-preview-grid"><div class="projects-window projects-window--main"><div class="projects-browser-bar"><i class="projects-browser-dot"></i><i class="projects-browser-dot"></i><i class="projects-browser-dot"></i><span class="projects-browser-title">GAMEREADY FITNESS</span></div><img src="./assets/gameready-fitness.png" alt=""><span class="projects-category">Websites</span></div><div class="projects-preview-side"><div class="projects-window projects-window--mini"><div class="projects-browser-bar"><i class="projects-browser-dot"></i><i class="projects-browser-dot"></i><i class="projects-browser-dot"></i><span class="projects-browser-title">ATLANTA MOUNTS</span></div><img src="./assets/atlanta-mounts.png" alt=""><span class="projects-category">Sales Funnels</span></div><div class="projects-flow"><div class="projects-flow-head"><span>AUTOMATIONS</span><span class="projects-flow-sample">Sample flow</span></div><svg viewBox="0 0 192 42" role="presentation"><path d="M49 21h13m5 0-4-3m4 3-4 3M112 21h13m5 0-4-3m4 3-4 3"/><rect x="1" y="7" width="48" height="28" rx="7"/><rect x="68" y="7" width="44" height="28" rx="7"/><rect x="131" y="7" width="59" height="28" rx="7"/><text x="25" y="24" text-anchor="middle">New lead</text><text x="90" y="24" text-anchor="middle">Follow-up</text><text x="160" y="24" text-anchor="middle">Booked</text></svg></div></div></div><div class="projects-preview-footer"><span class="projects-explore">Explore Projects<span class="projects-explore-icon"><svg viewBox="0 0 16 16"><path d="M3 8h10M8 3l5 5-5 5"/></svg></span></span></div></div></button>
 <button class="tile" data-o="about"><div class="th"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>About</div><small>Who I am and how I work.</small><div class="face"></div></button>
 <button class="tile" data-o="services"><div class="th"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg></span>Services</div><div class="list"><span>WordPress<b>›</b></span><span>GHL Automation<b>›</b></span><span>Shopify<b>›</b></span></div></button>
 <button class="tile" data-o="services"><div class="th"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></span>AI workflows</div><small>Automations that handle the repetitive work.</small><div class="chips"><i>Claude</i><i>ChatGPT</i><i>Lead replies</i><i>Reporting</i></div></button>
