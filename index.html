@@ -280,7 +280,8 @@ main{width:min(100%,1640px);margin:0 auto;padding:clamp(22px,3.3vw,48px) clamp(2
 @media(max-width:390px){.me h2{max-width:116px;overflow:hidden;text-overflow:ellipsis}nav button{padding-inline:5px;font-size:.61rem}.bento{grid-template-rows:minmax(330px,auto) repeat(4,minmax(170px,auto)) minmax(155px,auto)}.projects-card-copy>small{font-size:.68rem}}
 @media(prefers-reduced-motion:reduce){.projects-site-frame img,.project-carousel-btn,.projects-carousel-dots button{transition:none!important}}.bento>.tile.ct{background:var(--ink);color:#fff;border-color:var(--ink)}.bento>.tile.ct .th,.bento>.tile.ct .big{color:#fff}.bento>.tile.ct small{color:#ffffffb8}
 @media(max-width:1000px){.bento>.tile.w{grid-column:span 2}}
-@media(max-width:620px){.bento>.tile.w{grid-column:auto}}</style></head><body>
+@media(max-width:620px){.bento>.tile.w{grid-column:auto}}html,body{overflow-x:hidden;overflow-y:auto}
+@media(min-width:1001px){h1 br{display:none}h1{font-size:clamp(2.35rem,3.8vw,3.8rem)}}</style></head><body>
 <div class="app">
 <aside>
 <div class="me"><div class="pic" role="img" aria-label="Portrait of John Lloyd Bariquit"></div>
@@ -458,5 +459,16 @@ const lbx=document.getElementById("lb");let li=0,lightboxItems=IM;
 function lb(k,items=lightboxItems){lightboxItems=items;li=(k+lightboxItems.length)%lightboxItems.length;lbi.src=lightboxItems[li].s;lbi.alt=lightboxItems[li].c;lbc.textContent=lightboxItems[li].c+" ("+(li+1)+"/"+lightboxItems.length+")";lbx.classList.add("show")}
 lx.onclick=()=>lbx.classList.remove("show");lp.onclick=()=>lb(li-1);ln.onclick=()=>lb(li+1);lbx.onclick=e=>{if(e.target===lbx||e.target.tagName==="FIGURE")lbx.classList.remove("show")};
 addEventListener("keydown",e=>{if(lbx.classList.contains("show")){if(e.key==="Escape")lbx.classList.remove("show");if(e.key==="ArrowLeft")lb(li-1);if(e.key==="ArrowRight")lb(li+1);return}if(e.key==="Escape")open("home")});
-setupProjectPreviewCarousel();
+function setupProjectPreviewCarousel(){
+const root=document.querySelector("[data-project-carousel]");if(!root||!Array.isArray(SITES)||!SITES.length)return;
+const image=root.querySelector("[data-carousel-image]"),title=root.querySelector("[data-carousel-title]"),dots=[...root.querySelectorAll("[data-carousel-dot]")];let index=1,timer=null,hovered=false,focused=false,pointer=null,startX=0,changeId=0;
+const motionOff=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function show(next){index=(next+SITES.length)%SITES.length;const site=SITES[index],id=++changeId;image.classList.add("is-changing");window.setTimeout(()=>{if(id!==changeId)return;image.src="./"+site.s;image.alt=site.c+" website preview";title.textContent=site.c.toUpperCase();image.classList.remove("is-changing")},140);dots.forEach((dot,i)=>{if(i===index)dot.setAttribute("aria-current","true");else dot.removeAttribute("aria-current")});root.setAttribute("aria-label","Website project previews. Showing "+site.c)}
+function stop(){if(timer){clearInterval(timer);timer=null}}
+function start(){stop();if(!motionOff&&!hovered&&!focused&&document.visibilityState==="visible")timer=setInterval(()=>show(index+1),5200)}
+root.querySelector("[data-carousel-prev]").addEventListener("click",()=>{show(index-1);start()});root.querySelector("[data-carousel-next]").addEventListener("click",()=>{show(index+1);start()});dots.forEach(dot=>dot.addEventListener("click",()=>{show(Number(dot.dataset.carouselDot));start()}));
+root.addEventListener("pointerenter",()=>{hovered=true;stop()});root.addEventListener("pointerleave",()=>{hovered=false;start()});root.addEventListener("focusin",()=>{focused=true;stop()});root.addEventListener("focusout",()=>{window.setTimeout(()=>{focused=root.contains(document.activeElement);if(!focused)start()},0)});
+root.addEventListener("pointerdown",event=>{if(event.pointerType==="mouse"&&event.button!==0)return;pointer=event.pointerId;startX=event.clientX;stop();if(root.setPointerCapture)root.setPointerCapture(event.pointerId)});
+root.addEventListener("pointerup",event=>{if(pointer!==event.pointerId)return;const delta=event.clientX-startX;if(Math.abs(delta)>38)show(index+(delta<0?1:-1));pointer=null;if(!hovered&&!focused)start()});root.addEventListener("pointercancel",()=>{pointer=null;if(!hovered&&!focused)start()});document.addEventListener("visibilitychange",()=>document.visibilityState==="visible"?start():stop());start()
+}setupProjectPreviewCarousel();
 </script></body></html>
